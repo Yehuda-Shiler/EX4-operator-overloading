@@ -50,9 +50,13 @@ public: int min, max, hour;
 		const CircularInt operator --(int);
 		CircularInt& operator --();
 		CircularInt& operator +=(int m);
+		CircularInt&  operator +=(CircularInt &D);
 		CircularInt operator -=(int m);
+		CircularInt&  operator -=(CircularInt &D);
 		CircularInt& operator *=(int m);
+		CircularInt&  operator *=(CircularInt &D);
 		CircularInt& operator /=(int m);
+		CircularInt&  operator /=(CircularInt &D);
 		bool operator==(int a);
 		bool  operator==(CircularInt &D);
 		friend int operator==(const int a,const CircularInt &D);
@@ -246,6 +250,13 @@ public: int min, max, hour;
 			}
 			return *this;
 		}
+
+		CircularInt& CircularInt:: operator +=(CircularInt &D)  // hour1+=hour2
+		{
+			this->hour = this->normal(this->hour + D.hour);
+			return *this;
+		}
+
 		CircularInt CircularInt:: operator -=(int m)    // hour-=10
 		{
 			int ans, a = this->hour - m;
@@ -259,6 +270,13 @@ public: int min, max, hour;
 			this->hour = ans;
 			return *this;
 		}
+
+		CircularInt& CircularInt:: operator -=(CircularInt &D)  // hour1-=hour2
+		{
+			this->hour = this->normal(this->hour - D.hour);
+			return *this;
+		}
+
 		CircularInt& CircularInt:: operator *=(int m)    //// hour*=10
 		{
 			int a = (this->hour * m) % this->max;
@@ -270,6 +288,13 @@ public: int min, max, hour;
 			}
 			return *this;
 		}
+
+		CircularInt& CircularInt:: operator *=(CircularInt &D)    //// hour1*=hour2
+		{
+			this->hour = this->normal(this->hour * D.hour);
+			return *this;
+		}
+
 		CircularInt& CircularInt:: operator /=(int m)    // hour/=10
 		{
 			for (int i = this->min; i < this->max; ++i)
@@ -283,6 +308,18 @@ public: int min, max, hour;
 			throw string("There is no number x in {1,12} such that x*" + to_string(m) + "=" + to_string(this->hour));
 		}
 
+		CircularInt& CircularInt:: operator /=(CircularInt &D)    //// hour1*=hour2
+		{
+			for (int i = this->min; i < this->max; ++i)
+			{
+				if ((i*D.hour) % this->max == this->hour%this->max)
+				{
+					this->hour = i;
+					return *this;
+				}
+			}
+			throw string("There is no number x in {1,12} such that x*" + to_string(D.hour) + "=" + to_string(this->hour));
+		}
 		
 		bool CircularInt:: operator==(int a)  //hour==10
 		{
