@@ -42,8 +42,10 @@ public: int min, max, hour;
 		int operator-();
 		friend CircularInt operator*(int a, CircularInt &D);
 		friend CircularInt operator*(CircularInt &D, int a);
+		CircularInt operator*(CircularInt &D);
 		friend CircularInt operator/(CircularInt &D, int a);
 		friend CircularInt operator/(int a,CircularInt &D);
+		CircularInt operator/(CircularInt &D);
 		friend CircularInt operator%(CircularInt &D, int a);
 		const CircularInt operator ++(int);
 		CircularInt& operator ++();
@@ -149,6 +151,12 @@ public: int min, max, hour;
 			return temp;
 		}
 
+		 CircularInt CircularInt:: operator*(CircularInt &D)   //hour1*hour2
+		 {
+			 CircularInt temp(D);
+			 temp.hour = temp.normal((D.hour)*this->hour);
+			 return temp;
+		 }
 		 CircularInt operator/(CircularInt &D, int a)   // hour/10
 		{
 			CircularInt temp(D);
@@ -163,7 +171,7 @@ public: int min, max, hour;
 			throw string("There is no number x in {1,12} such that x*" + to_string(a) + "=" + to_string(D.hour));
 		}
 
-		 CircularInt operator/(int a, CircularInt &D)   // hour/10
+		 CircularInt operator/(int a, CircularInt &D)   // 10/hour
 		 {
 			 CircularInt temp(D);
 			 for (int i = temp.min; i < temp.max; ++i)
@@ -176,6 +184,20 @@ public: int min, max, hour;
 			 }
 			 throw string("There is no number x in {1,12} such that x*" + to_string(a) + "=" + to_string(D.hour));
 		 }
+
+		 CircularInt CircularInt:: operator/(CircularInt &D)   // hour1/hour2
+		 {
+			 CircularInt temp(D);
+		 for (int i = temp.min; i < temp.max; ++i)
+		 {
+			 if ((i*D.hour) % D.max == D.hour%D.max)
+			 {
+				 temp.hour = i;
+				 return temp;
+			 }
+		 }
+		 throw string("There is no number x in {1,12} such that x*" + to_string(a) + "=" + to_string(D.hour));
+		}
 
 		 CircularInt operator%(CircularInt &D, int a)    //hour%10
 		{
