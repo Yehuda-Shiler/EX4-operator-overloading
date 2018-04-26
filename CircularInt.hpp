@@ -55,6 +55,7 @@ public: int min, max, hour;
 		CircularInt& operator /=(int m);
 		bool operator==(int a);
 		bool  operator==(CircularInt &D);
+		friend int operator==(const int a,const CircularInt &D);
 		bool operator!=(int a);
 		bool  operator!=(CircularInt &D);
 		bool operator>(int a);
@@ -282,7 +283,14 @@ public: int min, max, hour;
 			else
 				return false;
 		}
-		
+		 int  operator==(const int a, CircularInt &D)  //10==hour
+		{
+			if (D.hour == D.normal(a))
+				return true;
+			else
+				return false;
+		}
+
 		bool CircularInt:: operator==(CircularInt &D)  //hour1==hour2
 		{
 			if (this->hour == D.hour&&this->max == D.max&&this->min == D.min)
