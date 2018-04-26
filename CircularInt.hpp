@@ -196,7 +196,7 @@ public: int min, max, hour;
 				 return temp;
 			 }
 		 }
-		 throw string("There is no number x in {1,12} such that x*" + to_string(a) + "=" + to_string(D.hour));
+		 throw string("There is no number x in {1,12} such that x*" + to_string(this->hour) + "=" + to_string(D.hour));
 		}
 
 		 CircularInt operator%(CircularInt &D, int a)    //hour%10
