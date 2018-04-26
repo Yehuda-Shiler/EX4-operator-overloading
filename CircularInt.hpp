@@ -1,5 +1,4 @@
 
-
 #include <string>
 #include <iostream>
 using namespace std;
@@ -55,9 +54,12 @@ public: int min, max, hour;
 		CircularInt& operator *=(int m);
 		CircularInt& operator /=(int m);
 		bool operator==(int a);
+		bool  operator==(CircularInt &D);
 		bool operator!=(int a);
+		bool  operator!=(CircularInt &D);
 		bool operator>(int a);
 		bool operator<(int a);
+
 		bool operator>=(int a);
 		bool operator<=(int a);
 		friend ostream &operator<<(ostream &output, const CircularInt &D);
@@ -273,7 +275,7 @@ public: int min, max, hour;
 		}
 
 		
-		bool CircularInt:: operator==(int a)
+		bool CircularInt:: operator==(int a)  //hour==10
 		{
 			if (this->hour == this->normal(a))
 				return true;
@@ -281,9 +283,25 @@ public: int min, max, hour;
 				return false;
 		}
 		
-		bool CircularInt:: operator!=(int a)
+		bool CircularInt:: operator==(CircularInt &D)  //hour1==hour2
+		{
+			if (this->hour == D.hour&&this->max == D.max&&this->min == D.min)
+				return true;
+			else
+				return false;
+		}
+
+		bool CircularInt:: operator!=(int a)     //hour!=10
 		{
 			if (this->hour != this->normal(a))
+				return true;
+			else
+				return false;
+		}
+
+		bool CircularInt:: operator!=(CircularInt &D)  //hour1!=hour2
+		{
+			if (this->hour != D.hour||this->max != D.max||this->min != D.min)
 				return true;
 			else
 				return false;
