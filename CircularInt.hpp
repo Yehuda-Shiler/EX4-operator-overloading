@@ -176,7 +176,7 @@ public: int min, max, hour;
 			 CircularInt temp(D);
 			 for (int i = temp.min; i < temp.max; ++i)
 			 {
-				 if ((i*a) % D.max == D.hour%D.max)
+				 if ((i*D.hour) % D.max == a%D.max)
 				 {
 					 temp.hour = i;
 					 return temp;
@@ -190,7 +190,7 @@ public: int min, max, hour;
 			 CircularInt temp(D);
 		 for (int i = temp.min; i < temp.max; ++i)
 		 {
-			 if ((i*D.hour) % D.max == D.hour%D.max)
+			 if ((i*D.hour) % D.max == this->hour%D.max)
 			 {
 				 temp.hour = i;
 				 return temp;
