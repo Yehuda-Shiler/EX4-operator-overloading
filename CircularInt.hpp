@@ -485,6 +485,7 @@ public: int min, max, hour;
 		 istream& operator>>(istream& is, CircularInt &D)     //input
 		{
 			is >> D.hour;
+			D.hour = D.normal(D.hour);
 			return is;
 		}
 
