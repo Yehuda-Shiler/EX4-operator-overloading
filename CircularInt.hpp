@@ -61,8 +61,9 @@ public: int min, max, hour;
 		bool operator!=(int a);
 		bool  operator!=(CircularInt &D);
 		bool operator>(int a);
+		bool operator>(CircularInt &D);
 		bool operator<(int a);
-
+		bool operator<(CircularInt &D);
 		bool operator>=(int a);
 		bool operator<=(int a);
 		friend ostream &operator<<(ostream &output, const CircularInt &D);
@@ -324,7 +325,7 @@ public: int min, max, hour;
 				return false;
 		}
 
-		bool CircularInt:: operator>(int a)
+		bool CircularInt:: operator>(int a)           //hour>10
 		{
 			if (this->hour > this->normal(a))
 				return true;
@@ -332,9 +333,25 @@ public: int min, max, hour;
 				return false;
 		}
 
-		bool CircularInt:: operator<(int a)
+		bool CircularInt:: operator>(CircularInt &D)           //hour1>hour2
+		{
+			if (this->hour > D.hour)
+				return true;
+			else
+				return false;
+		}
+
+		bool CircularInt:: operator<(int a)                 //hour<10
 		{
 			if (this->hour < this->normal(a))
+				return true;
+			else
+				return false;
+		}
+
+		bool CircularInt:: operator>(CircularInt &D)           //hour1<hour2
+		{
+			if (this->hour < D.hour)
 				return true;
 			else
 				return false;
