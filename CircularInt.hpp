@@ -11,7 +11,7 @@ public: int min, max, hour;
 		CircularInt(int x, int y) {
 			this->min = x;
 			this->max = y;
-			this->hour = rand() % (this->max) + this->min;
+			this->hour = 1;
 		}
 		CircularInt(CircularInt &D)
 		{
