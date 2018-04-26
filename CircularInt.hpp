@@ -281,15 +281,7 @@ public: int min, max, hour;
 
 		CircularInt CircularInt:: operator -=(int m)    // hour-=10
 		{
-			int ans, a = this->hour - m;
-			a = a % (this->max) + this->min;
-			if (a > 0) {
-				ans = a;
-			}
-			else
-				ans = this->max + a;
-
-			this->hour = ans;
+			this->hour = this->normal(this->hour - m);
 			return *this;
 		}
 
