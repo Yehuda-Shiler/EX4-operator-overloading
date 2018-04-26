@@ -1,6 +1,4 @@
-
-
-
+#include "stdafx.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -63,8 +61,10 @@ public: int min, max, hour;
 		bool  operator!=(CircularInt &D);
 		bool operator>(int a);
 		bool operator>(CircularInt &D);
+		friend int operator>(const int a, const CircularInt &D);
 		bool operator<(int a);
 		bool operator<(CircularInt &D);
+		friend int operator<(const int a, const CircularInt &D);
 		bool operator>=(int a);
 		bool operator<=(int a);
 		friend ostream &operator<<(ostream &output, const CircularInt &D);
@@ -342,6 +342,13 @@ public: int min, max, hour;
 				return false;
 		}
 
+		 int operator>(const int a, const CircularInt &D)     //10>hour
+		{
+			if (a > D.hour)
+				return true;
+			else
+				return false;
+		}
 		bool CircularInt:: operator<(int a)                 //hour<10
 		{
 			if (this->hour < this->normal(a))
@@ -350,7 +357,7 @@ public: int min, max, hour;
 				return false;
 		}
 
-		bool CircularInt:: operator>(CircularInt &D)           //hour1<hour2
+		bool CircularInt:: operator<(CircularInt &D)           //hour1<hour2
 		{
 			if (this->hour < D.hour)
 				return true;
@@ -358,6 +365,13 @@ public: int min, max, hour;
 				return false;
 		}
 
+		int operator<(const int a, const CircularInt &D)      //10<hour
+		{
+			if (a < D.hour)
+				return true;
+			else
+				return false;
+		}
 		bool CircularInt:: operator>=(int a)
 		{
 			if (this->hour >= this->normal(a))
