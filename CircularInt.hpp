@@ -1,4 +1,5 @@
 
+
 #include <string>
 #include <iostream>
 using namespace std;
@@ -43,6 +44,7 @@ public: int min, max, hour;
 		friend CircularInt operator*(int a, CircularInt &D);
 		friend CircularInt operator*(CircularInt &D, int a);
 		friend CircularInt operator/(CircularInt &D, int a);
+		friend CircularInt operator/(int a,CircularInt &D);
 		friend CircularInt operator%(CircularInt &D, int a);
 		const CircularInt operator ++(int);
 		CircularInt& operator ++();
@@ -145,6 +147,20 @@ public: int min, max, hour;
 			}
 			throw string("There is no number x in {1,12} such that x*" + to_string(a) + "=" + to_string(D.hour));
 		}
+
+		 CircularInt operator/(int a, CircularInt &D)   // hour/10
+		 {
+			 CircularInt temp(D);
+			 for (int i = temp.min; i < temp.max; ++i)
+			 {
+				 if ((i*a) % D.max == D.hour%D.max)
+				 {
+					 temp.hour = i;
+					 return temp;
+				 }
+			 }
+			 throw string("There is no number x in {1,12} such that x*" + to_string(a) + "=" + to_string(D.hour));
+		 }
 
 		 CircularInt operator%(CircularInt &D, int a)    //hour%10
 		{
